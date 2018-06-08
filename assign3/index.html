@@ -1,0 +1,97 @@
+<!---
+Andrew Wood's ePortfolio
+COP4813 - Summer 2018
+index.html - Data Processing - Assignment 3
+--->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>Form Validation Program</title>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
+		<link rel="stylesheet" type="text/css" href="../style.css">
+		<script src="./arrayMethods.js"></script>
+	</head>
+	
+	<body class="clearfix" onload="resetRadios();">
+		
+	<!--This program is going to assume that the user will enter a set of numbers separated
+		by whitespace -->
+		<h1 style="text-align:center">Number Set Statistics</h1>
+		<p style="text-align:center">Let's have some fun with numbers!</p>
+		<hr />
+		<p>Welcome to Fun With Numbers!  This web application will display statistical information about the number set that you
+		provide. Please choose from the following options:</p>
+		<ul>
+			<li class="numOptions">Paste values in text box: Enter a set of numbers separated by white space</li>
+			<li class="numOptions">Enter values individually: Enter numbers one-by-one using an select list</li>
+		</ul>
+		<form id="selectMethod">
+			<input type="radio" name="option" value="Paste values in a text box" onclick="setList()" checked>
+			Paste values in a text box<br />
+			<input type="radio" name="option" value="Enter values individually" onclick="setIndividual()">
+			Enter values individually<br />	
+		</form>
+
+		<form class="textInput" id="textInputForm">
+			<textarea id="textBoxData"></textarea><br />
+			<button  type="button" id="buttonTextInput" onclick="getStats(this.id);">Get Statistics</button>
+			<button  type="reset">Reset</button><br />
+		</form>
+		<form class="individualInput" style="display:none;">
+			<span>Input:</span><input type="text" id="inputBox" autocomplete="off"></input><br />
+			<button type="button" onclick="addNumber()">Add Number</button><br />
+			<button type="button" onclick="removeNumber()">Remove Number</button><br />
+			<select id="inputSelector" size="5" style="width:100px"></select><br />
+			<button type ="button" id="buttonListInput" onclick="getStats(this.id);">Get Statistics</button>
+			<button type="reset" onclick="optionListReset()">Reset</button>
+		</form>
+		
+		<p>Results:</p>
+		<table class="statsTable">
+			<tr>
+				<th>Attribute</th>
+				<th>Value</th>
+			</tr>
+			<tr>
+				<td>Number of Values</td>
+				<td><input type="text" id="numValues"></td>
+			</tr>
+			<tr>
+				<td>Summation</td>
+				<td><input type="text" id="sum"></td>
+			</tr>
+			<tr>
+				<td>Mean</td>
+				<td><input type="text" id="mean"></td>
+			</tr>
+			<tr>
+				<td>Median</td>
+				<td><input type="text" id="median"></td>
+			</tr>
+			<tr>
+				<td>Mode</td>
+				<td><input type="text" id="mode"></td>
+			</tr>
+			<tr>
+				<td>Variance</td>
+				<td><input type="text" id="variance"></td>
+			</tr>
+			<tr>
+				<td>Standard Deviation</td>
+				<td><input type="text" id="stddev"></td>
+			</tr>
+		</table>
+		
+		<p>
+			<a href="./testResults.html">Click Here for Test Results</a>					
+		</p>
+		<hr />
+		<h2>My ePortfolio Index</h2>
+		<p><a href="../index.html">Andrew's ePortfolio Index</a></p>
+				
+	</body>
+</html>

@@ -1,0 +1,486 @@
+<!---
+Andrew Wood's ePortfolio
+COP4813 - Summer 2018
+index.html - Forms and Things
+
+This form program asks the user a series of demographic and
+
+--->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>Form Validation Program</title>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
+		<link rel="stylesheet" type="text/css" href="../style.css">
+	</head>
+	
+	<script>
+	
+		var nameIssue = 0;
+		var ageIssue = 0;
+		var toppingIssue = 0;
+	
+		function checkName() {
+			var alphaExp = /^[a-z A-Z]+$/;
+			if (!(document.getElementById("userName").value.match(alphaExp)))
+			{
+				document.getElementById("nameError").style.display = "block";
+				nameIssue = 1;
+			}
+			else
+			{
+				nameIssue = 0;
+				document.getElementById("nameError").style.display = "none";
+			}
+		}
+		
+		
+		function checkAge() {
+				var numExp = /^[0-9]+$/;
+				var ageValue = document.getElementById("userAge").value;
+				if (!(ageValue.match(numExp)) || (ageValue < 0))
+				{
+					document.getElementById("ageError").style.display = "block";
+					ageIssue = 1;
+		
+				}
+				else
+				{
+					ageIssue = 0;
+					document.getElementById("ageError").style.display = "none";
+				}
+			}
+			
+		function validateToppings() {
+				//creates nodeList object of all the topping checkboxes
+				var checkBoxes = document.querySelectorAll("input[name^=topping]");
+				var toppingSelected = false;
+				
+				//loop through the checkBoxes, set bool value to true if anything is checked
+				//Note - this excludes the last one
+				for (i = 0; i < (checkBoxes.length - 1); i++)
+				{
+					if (checkBoxes[i].checked)
+					{
+						toppingSelected = true;
+					}
+						
+				}
+				//if nothing at all is checked - this is used for the final submit
+				if (!toppingSelected && !(checkBoxes[checkBoxes.length - 1].checked))
+				{
+					toppingIssue = 1;
+					document.getElementById("emptyToppingsError").style.display = "block";
+				}
+				else
+				{
+					document.getElementById("emptyToppingsError").style.display = "none";
+					toppingIssue = 0;
+				}
+				
+				
+				//if both the toppings are selected and also the no topping is selected
+				if (toppingSelected && checkBoxes[checkBoxes.length - 1].checked)
+				{
+					toppingIssue = 1;
+					document.getElementById("toppingsError").style.display = "block";
+				}
+				else
+				{
+					toppingIssue = 0;
+					document.getElementById("toppingsError").style.display = "none";
+				}
+			
+			}
+				
+		function finalCheck() {
+		
+			//run through to do final checks
+			checkName();
+			checkAge();
+			validateToppings();
+	
+			//alert("Name " + nameIssue);
+			//alert("Age " + ageIssue);
+			//alert("Topping " + toppingIssue);
+			
+			if (!(nameIssue || ageIssue || toppingIssue))
+			{
+				calcResult();	
+			}
+			else
+			{
+				removeResult();
+			}
+			
+			document.body.scrollTop = 0;
+   			document.documentElement.scrollTop = 0;
+		}
+		
+		//removes appended child nodes and hides the div
+		function removeResult()
+		{
+			var doc = document.getElementById("resultArea");
+			doc.style.display = "none";
+		}
+		
+		function resetActions()
+		{
+			removeResult();
+			removeErrors();
+			document.body.scrollTop = 0;
+   			document.documentElement.scrollTop = 0;
+		}
+		
+		function removeErrors()
+		{
+			var errorMsgs = document.getElementsByClassName("error");
+			for (var i = 0; i < errorMsgs.length; i++)
+			{
+				errorMsgs[i].style.display = "none";
+			}
+		
+		}
+		
+		//the algorithm used to calculate the pizza score
+		function calcResult()
+		{
+			
+			//stores the total result
+			var result = 0;
+			
+			//start with age
+			var age = document.getElementById("userAge").value;
+			
+			var ageUpLift = 0;
+				
+			if (age < 10) {
+				ageUpLift = 5;
+			}
+			else if (age < 20) {
+				ageUpLift = 15;
+			}
+			else if (age < 40) {
+				ageUpLift = 10;
+			}
+			else {
+				ageUpLift = 5;
+			}
+			
+			//alert(ageUpLift);
+			result += ageUpLift;
+			
+			//for debugging only
+			//alert("Age uplift is " + ageUpLift + " and running total is " + result);
+			
+			//Moving to toppings
+			var checkBoxes = document.querySelectorAll("input[name^=topping]");
+			var toppingUpLift = 0;
+			//do a series of if statements to add when necessary
+			if (checkBoxes[0].checked) //if pepperoni is checked
+			{
+				toppingUpLift += 10;
+			}
+			if (checkBoxes[1].checked) //if ham is checked
+			{
+				toppingUpLift += 20;
+			}
+			if (checkBoxes[2].checked) //if bacon is checked
+			{
+				toppingUpLift += 10;
+			}
+			if (checkBoxes[3].checked) //if Mushroom is checked
+			{
+				toppingUpLift += 5;
+			}
+			if (checkBoxes[4].checked) //if pineapple is checked
+			{
+				toppingUpLift += 30;
+			}
+			if (checkBoxes[5].checked) //if green pepper is checked
+			{
+				toppingUpLift += 5;
+			}
+			if (checkBoxes[6].checked) //if red pepper is checked
+			{
+				toppingUpLift += 5;
+			}
+			if (checkBoxes[7].checked) //if onion is checked
+			{
+				toppingUpLift += 10;
+			}
+			if (checkBoxes[8].checked) //if tomato is checked
+			{
+				toppingUpLift += 5;
+			}
+			if (checkBoxes[9].checked) //if cheeseOnly is checked
+			{
+				toppingUpLift = 0;
+			}
+			
+			//alert(toppingUpLift);
+			result += toppingUpLift;
+			//alert(result);
+			
+			//now, do the time of day attribute
+			var timeOfDay = document.getElementById("orderTime").value;
+			var timeUplift = 0;
+			switch (timeOfDay)
+			{
+				case "earlyMorning":
+					timeUplift = 50;
+					break;
+				case "lateMorning":
+					timeUplift = 40;
+					break;
+				case "midDay":
+					timeUplift = 10;
+					break;
+				case "earlyEvening":
+					timeUplift = 10;
+					break;
+				case "evening":
+					timeUplift = 0;
+					break;
+				case "lateNight":
+					timeUplift = 20;
+					break;
+				default:
+					alert("something is wrong!");
+					break;
+			}
+			
+			//alert(timeUplift);
+			
+			result += timeUplift;
+			//alert(result);
+			
+			//now, do the delivery vs takeout
+			var aquireMethodRadios = document.getElementsByName("DeliveryOption");
+			var aquireMethodResult = "";
+			var aquireMethodUplift = 0;
+			for (var i = 0; i < aquireMethodRadios.length; i++)
+			{
+				if (aquireMethodRadios[i].checked)
+				{
+					aquireMethodResult = aquireMethodRadios[i].value;
+				}
+			}
+			
+			//alert(aquireMethodResult);
+			switch (aquireMethodResult)
+			{
+				case "delivery":
+					aquireMethodUplift = 5;
+					break;
+				case "takeout":
+					aquireMethodUplift = 15;
+					break;
+				default:
+					alert("something is wrong!");
+					break;
+			}
+			
+			//alert(aquireMethodUplift);
+			result += aquireMethodUplift;
+			//alert(result);
+			
+			
+			//now do delivery chain
+			var chainRadios = document.getElementsByName("LocaleOption");
+			var chainResult = "";
+			var chainUplift = 0;
+			for (var i = 0; i < chainRadios.length; i++)
+			{
+				if (chainRadios[i].checked)
+				{
+					chainResult = chainRadios[i].value;
+				}
+			}
+			
+			switch (chainResult)
+			{
+				case "dominos":
+					chainUplift = 5;
+					break;
+				case "pizzaHut":
+					chainUplift = 10;
+					break;
+				case "papaJohns":
+					chainUplift = 15;
+					break;
+				case "littleCaesars":
+					chainUplift = 15;
+					break;
+				case "CPK":
+					chainUplift = 25;
+					break;
+				case "localChain":
+					chainUplift = 40;
+					break;
+				default:
+					alert("something is wrong!");
+					break;
+			}
+			
+			//alert(chainUplift);
+			result += chainUplift;
+			//alert(result);
+			
+			
+			//now do pizza essence
+			var essenceRadios = document.getElementsByName("pizzaKey");
+			var essenceResult = "";
+			var essenceUplift = 0;
+			for (var i = 0; i < essenceRadios.length; i++)
+			{
+				if (essenceRadios[i].checked)
+				{
+					essenceResult = essenceRadios[i].value;
+				}
+			}
+			
+			switch (essenceResult)
+			{
+				case "cheese":
+					essenceUplift = 30;
+					break;
+				case "sauce":
+					essenceUplift = 10;
+					break;
+				case "dough":
+					essenceUplift = 40;
+					break;
+				case "toppings":
+					essenceUplift = 50;
+					break;
+				case "presentation":
+					essenceUplift = 70;
+					break;
+				default:
+					alert("something is wrong!");
+					break;
+			}
+			
+			//alert(essenceUplift);
+			result += essenceUplift;
+			//alert(result);
+			var userProfile = "";
+			var descriptionText = "";
+			
+			//determine profile
+			if (result <= 100)
+			{
+				userProfile = "Conventional";
+				descriptionText = "You're pretty vanilla when it comes to pizza.  You don't like to experiment too much, and you" 
+					+ " fit a standard mold for pizza orderers everywhere.";
+			}
+			else if (result <= 200)
+			{
+				userProfile = "Experimental";
+				descriptionText = "You like to get a bit edgy with your pizza.  From the toppings you choose to the time you find"
+					+ " yourself munching on it, you stand out from the crowd."
+			}
+			else
+			{
+				userProfile = "Audacious";
+				descriptionText = "You are the Elon Musk of pizzas.  Nothing about your habits is anywhere remotely near normal.  You soon"
+					+ " may find yourself creating the next generation of cheesy goodness."
+			}				
+			
+			
+			var name = document.getElementById("userName").value;
+			document.getElementById("resultArea").style.display = "block";
+			var headingLine = document.getElementById("resultGreeting");
+			headingLine.innerHTML = name + ", your pizza profile is:";
+			var profile = document.getElementById("resultProfile");
+			profile.innerHTML = userProfile;
+			var description = document.getElementById("profileDescription");
+			description.innerHTML = descriptionText;
+		}
+	
+	</script>
+	
+	<body>
+		<h1 style="text-align:center">Find out your pizza score!</h1>
+		<p style="text-align:center">Figure out where you land on the pizza continuum by answering the questions below.</p>
+		<hr />
+		<div class="clearfix">
+			<div class="centerDiv"> 
+				<div class="col1">
+					<p>Please answer the questions below.</p>
+					<form id="userInfo">
+						What is your name?
+						<input id ="userName" name="userName" type="text" onchange="checkName()">
+						<br />
+						<div id="nameError" class="error" style="display:none">Please enter a valid name.<br /></div>
+						What is your age?
+						<!-- Will be validated to ensure it is a number -->
+						<input id="userAge" name="userAge" type="text" onchange="checkAge()">
+						<br />
+						<div id="ageError" class="error" style="display:none">Please enter a valid age.<br /></div>
+						<!-- Will be validated to ensure standard is met -->
+						Which toppings do you typically order with your pizzas? Select all that apply.<br />
+						<input type="checkbox" name="topping1" value="Pepperoni" onchange="validateToppings()">Pepperoni<br />
+						<input type="checkbox" name="topping2" value="Ham" onchange="validateToppings()">Ham<br />
+						<input type="checkbox" name="topping3" value="Bacon" onchange="validateToppings()">Bacon<br />
+						<input type="checkbox" name="topping3" value="Mushroom" onchange="validateToppings()">Mushroom<br />
+						<input type="checkbox" name="topping3" value="Pineapple" onchange="validateToppings()">Pineapple<br />
+						<input type="checkbox" name="topping4" value="Green Pepper" onchange="validateToppings()">Green Pepper<br />
+						<input type="checkbox" name="topping5" value="Red Pepper" onchange="validateToppings()">Red Pepper<br />
+						<input type="checkbox" name="topping6" value="Onion" onchange="validateToppings()">Onion<br />
+						<input type="checkbox" name="topping7" value="Tomato" onchange="validateToppings()">Tomato<br />
+						<input type="checkbox" name="toppingControl" value="none" onchange="validateToppings()">No toppings, cheese only!<br />
+						<div id="toppingsError" class="error" style="display:none">You cannot have other values checked while 
+							"no toppings" is checked!<br /></div>
+						<div id="emptyToppingsError" class="error" style="display:none">You must make a selection.<br /></div>
+						What time of day are you most likely to order your pizza? <br />
+						<select id ="orderTime" name="orderTime">
+    						<option value="earlyMorning">Early Morning</option>
+						    <option value="lateMorning">Late Morning</option>
+    						<option value="midDay">Mid Day</option>
+   							<option value="earlyEvening">Early Evening</option>
+   							<option value="evening">Evening</option>
+   							<option value="lateNight">Late Night</option>
+						</select> <br />
+						Do you typically do delivery or take out? <br />
+	 					<input type="radio" name="DeliveryOption" value="delivery" checked>Delivery<br />
+  						<input type="radio" name="DeliveryOption" value="takeout">Take Out<br />
+  						From where do you typically order? <br />
+  						<input type="radio" name="LocaleOption" value="dominos" checked>Domino's<br />  						
+  						<input type="radio" name="LocaleOption" value="pizzaHut">Pizza Hut<br />
+  						<input type="radio" name="LocaleOption" value="papaJohns">Papa John's<br />
+  						<input type="radio" name="LocaleOption" value="littleCaesars">Little Caesar's<br />
+  						<input type="radio" name="LocaleOption" value="CPK">California Pizza Kitchen<br />
+  						<input type="radio" name="LocaleOption" value="localChain">My Local Chain<br />						
+						And finally, what makes a pizza a pizza? <br />
+						<input type="radio" name="pizzaKey" value="cheese" checked>The Cheese<br />
+						<input type="radio" name="pizzaKey" value="sauce">The Sauce<br />
+						<input type="radio" name="pizzaKey" value="dough">The Dough<br />
+						<input type="radio" name="pizzaKey" value="toppings">The Toppings<br />
+						<input type="radio" name="pizzaKey" value="presentation">The Presentation<br />
+						<button type="reset" value="reset" onclick="resetActions()">Reset Form</button>
+						<button type="button" value="calculateScore" onclick="finalCheck()">Calculate My Score!</button>
+					</form>
+				</div>
+				<div class="col2" id="resultArea" style="display:none">
+					<h2 id="resultGreeting"></h2>
+					<h3 id="resultProfile"></h3>
+					<p id="profileDescription"></p>
+				</div>
+			
+			</div> <!-- center div -->
+			
+		</div> <!-- clearfix -->
+		<div class="bottomPart">
+		<p><a href="./PizzaFlowProcess.png">Click Here for Process Flowchart</a></p>
+		</div>
+		<hr />
+		<h2>My ePortfolio Index</h2>
+		<p><a href="../index.html">Andrew's ePortfolio Index</a></p>
+		
+	</body>
+</html>

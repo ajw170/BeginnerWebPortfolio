@@ -1,0 +1,200 @@
+<!---
+Andrew Wood's ePortfolio
+COP4813 - Summer 2018
+index.html - Data Processing - Assignment 3
+--->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>CSS Animations</title>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
+		<link rel="stylesheet" type="text/css" href="../style.css">
+		<style>
+			canvas {
+    			border: none;
+    			margin: auto;
+			}
+			
+			div#container {
+				width: 450px;
+				height: 450px;
+				margin-left: 3em;
+				margin-right: 3em;
+				float: left;
+			}
+			
+			.red {
+				color:red;
+			}
+			
+			.orange {
+				color:orange;
+			}
+			
+			.blue {
+				color: blue;
+			}
+			
+			.yellow {
+				color:yellow;
+			}
+		</style>
+	</head>
+	
+	<body class="clearfix">
+		
+		<h1 style="text-align:center">Canvas Animation Magic</h1>
+		<p style="text-align:center">Let's have some fun with Canvas Animations!</p>
+		<hr />
+		
+		<div id="container" class="clearfix">
+    		<canvas id="myCanvas" width="450px" height="450px"></canvas>
+		</div>
+		<div id="description" class="clearfix">
+		
+		<h3>Mechanism of Gravity and Centripetal Acceleration</h3>
+		<p>The animation to the left demonstrates the concept of gravity and centripetal acceleration.</p>
+		<p>A rigid body's mass generates a gravitation field which attracts nearby objects with a force proportional to the
+		square of their distance.  The <span class="red">red moving circular bands</span> represent the gravitational force, which
+		is invisible but shown for visual effect.</p>
+		
+		<p>The <span class="orange">orbiting body</span>'s velocity is perpendicular to the dotted path shown.  However, the gravitational
+		pull between the <span class="orange">orbiting body</span> and the <span class="blue">rigid body</span> deflects the path of the
+		object and causes it to orbit as shown.  The vector for acceleration is always pointed directly into the center of the rigid body.
+		The <span class="yellow">moving line</span> between the rigid body and the orbiting object illustrates the force of gravity.
+		</p>
+		
+		<p>The <span class="blue">rigid body</span> may also move within space.  This is shown by the oscillating motion of the entire frame.
+		Note that the orbit continues regardless of where the rigid body moves.</p>		
+		</div>
+		
+		<script>
+			var mainCanvas = document.querySelector("#myCanvas");
+			var mainContext = mainCanvas.getContext("2d");
+			
+			var canvasWidth = mainCanvas.width;
+			var canvasHeight = mainCanvas.height;
+			
+			var requestAnimationFrame = window.requestAnimationFrame || 
+                            window.mozRequestAnimationFrame || 
+                            window.webkitRequestAnimationFrame || 
+                            window.msRequestAnimationFrame;
+                            
+            //global variables to control animations
+            var gravityChanger = 0;
+            var angle = 0;
+            var radiusMain = 176.8;
+            var framesPerSecond = 20;
+            
+            var centerX = 225;
+            var centerY = 225;
+ 
+ 			//The setTimeout routine slows down the animation
+			function drawGravityObject() {
+										
+				//clear the rectangle		
+				mainContext.clearRect(0, 0, canvasWidth, canvasHeight);
+
+				// draw the center gravity object
+				mainContext.beginPath();
+				var radius = 50;
+				mainContext.arc(centerX, centerY, radius, 0, Math.PI * 2, false);
+				mainContext.closePath();
+				// Color the central object gray
+				mainContext.fillStyle = "blue";
+				mainContext.fill();
+				mainContext.fillStyle = "black";
+				mainContext.font = "10px Arial";
+				mainContext.fillText("Rigid Body",centerX-23,centerY);
+	
+				//draw the revolving gravity object
+				mainContext.beginPath();
+				var radiusTwo = 25;
+				var xCoord = getCoordinates(angle,radiusMain)[0];
+				var yCoord = getCoordinates(angle,radiusMain)[1];
+				mainContext.arc(xCoord,yCoord,radiusTwo,0,Math.PI * 2, false);
+				mainContext.closePath();
+				//Color the revolving object orange
+				mainContext.fillStyle = "orange";
+				mainContext.fill();
+	
+				//draw the orbit outline
+				mainContext.beginPath();
+				mainContext.arc(centerX,centerY,radiusMain,0,Math.PI *2, false);
+				mainContext.lineWidth=0.75;
+				mainContext.strokeStyle="black";
+				mainContext.setLineDash([5]);
+				mainContext.closePath();
+				mainContext.stroke();
+	
+				//draw first gravity ring
+				mainContext.beginPath();
+				var radiusRing1 = 90 + 10 * Math.abs(Math.cos(gravityChanger));
+				mainContext.arc(centerX,centerY,radiusRing1,0,Math.PI*2,false);
+				mainContext.lineWidth=0.5;
+				mainContext.strokeStyle="red";
+				mainContext.setLineDash([0]);
+				mainContext.closePath();
+				mainContext.stroke();
+	
+				//draw second gravity ring
+				mainContext.beginPath();
+				var radiusRing2 = 100 + 10 * Math.abs(Math.cos(gravityChanger));
+				mainContext.arc(centerX,centerY,radiusRing2,0,Math.PI*2,false);
+				mainContext.lineWidth=0.5;
+				mainContext.strokeStyle="red";
+				mainContext.closePath();
+				mainContext.stroke();
+				
+				//draw gravity line
+				mainContext.beginPath();
+				var xCoordGrav = getCoordinates(angle,radiusMain)[0];
+				var yCoordGrav = getCoordinates(angle,radiusMain)[1];
+				var xCenterCoord = centerX;
+				var yCenterCoord = centerY;
+				mainContext.moveTo(xCoordGrav,yCoordGrav);
+				mainContext.lineTo(centerX,centerY);
+				mainContext.strokeStyle="yellow";
+				mainContext.lineWidth = 1;
+				mainContext.setLineDash([3]);
+				mainContext.closePath();
+				mainContext.stroke();
+	
+				gravityChanger += Math.PI / 64;
+				angle += Math.PI / 512;
+				centerX = 225 + 10 * Math.sin(gravityChanger);
+				//centerY += Math.cos(gravityChanger);
+	
+				requestAnimationFrame(drawGravityObject);
+	
+			}
+			
+			drawGravityObject();
+				
+			function getCoordinates(angle, radius)
+			{
+				//calculate the x and y coordinates based on the given angle
+				var x = Math.sin(angle) * radius;
+				var y = Math.cos(angle) * radius;
+				
+				x = (x + centerX); //the x offset
+				y = (centerY - y); //the y offset
+				
+				var coordArray = [x,y];
+			
+				return coordArray;
+			}
+		
+		
+		</script>	
+		
+		<hr />
+		<h2>My ePortfolio Index</h2>
+		<p><a href="../index.html">Andrew's ePortfolio Index</a></p>
+				
+	</body>
+</html>

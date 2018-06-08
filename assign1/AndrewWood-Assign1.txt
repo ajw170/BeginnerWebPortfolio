@@ -1,0 +1,18 @@
+Andrew J Wood
+Assignment 1 - Internet Programming - COP4813
+
+
+Link to Assignment 1:
+http://139.62.210.151/~n01418213/cop4813/assign1/index.html
+
+Link to ePortfolio Index:
+http://139.62.210.151/~n01418213/cop4813/index.html
+
+
+***I copied these images to the local server for hosting.  I did not have a hard link to these images in the HTML (I needed to resize the bullet image) ***
+
+Credit to Background Image:
+https://1.bp.blogspot.com/-CYQ5F9q6YlE/VIX6zgIg8EI/AAAAAAAAGwU/nkOudSDpI18/s1600/website-background-rough-surface.jpg\
+
+Credit to Bullet List Image:
+https://findicons.com/files/icons/2226/matte_basic/32/bullet_black.png

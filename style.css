@@ -1,0 +1,130 @@
+/* 	Stylesheet for Assignment 1
+	Andrew J Wood - Internet Programming
+	Summery 2018
+*/
+
+/* Ensures all elements adhere to border-box */
+* {
+	box-sizing: border-box;
+	}
+
+/* Text Link Behavior */
+a:link {
+	color: rgb(106,90,205);
+	}
+	
+a:visited {
+	color: rgb(106,90,205);
+	}
+
+a:hover {
+	color: lightblue;
+	}
+	
+a:active {
+	color: orange;
+	}
+
+.centerDiv { width: 90%; margin: auto; }
+
+.col1 { width: 50%; float:left;  padding: 5px;}
+
+.col2 { width: 50%; float:left;  padding: 5px;}
+
+.bottomPart { width: 90%; margin: auto; text-align:center;}
+	
+/* Header and Table Header Specifications */
+h1, h2, h3, h4, h5, h6, th {
+	font-family: "Georgia", Times, serif;
+	color: black;
+	}
+	
+/* Paragraph and Table Entry Specifications */
+p, tr, td, i, .numOptions {
+	font-family: "Verdana", sans-serif;
+	color: rgb(60,60,60);
+	}
+	
+/* Form Specifications */
+form {
+	font-family: "Verdana", sans-serif;
+	color: rgb(60,60,60)
+	}
+	
+.error {
+	color: red;
+	font-weight: bold;
+}
+
+.label {
+	font-weight: bold;
+}
+	
+	
+	
+/* Specifications for body; ensures specific margins */
+body {
+	margin-top:10px;
+	margin-bottom:50px;
+	background-image: url("./background.jpg");
+	background-repeat: repeat-x repeat-y;
+	}
+	
+/* Horizontal rule specifications */
+hr {
+	display: block;
+	margin: 5px;
+	background-color:black;
+	height: 2px;
+	border-width:0;
+	}
+
+/* Sets the unordered list bullet image */
+ul {
+	list-style: circle outside url('./bullet_black.png');
+	}
+	
+/* Specific style for schedule table */
+table.schedule {
+	border: 1px solid rgb(60,60,60);
+	border-collapse: collapse;
+	margin: 10px auto;
+	width: 60%;
+	}
+	
+table.schedule td, table.schedule tr, table.schedule th {
+		border: 1px solid dimgray;
+		text-align: left;
+	}
+	
+table.statsTable {
+
+	border-style: none;
+	text-align: left;
+}
+
+table.answerTable td {
+	border: 1px solid dimgray;
+}
+
+table.answerTable th {
+	border: 1px solid dimgray;
+	font-family: "Verdana", sans-serif;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.showHide {
+	display: none;
+}
+	
+	
+	

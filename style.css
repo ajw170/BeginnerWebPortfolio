@@ -32,6 +32,8 @@ a:active {
 .col2 { width: 50%; float:left;  padding: 5px;}
 
 .bottomPart { width: 90%; margin: auto; text-align:center;}
+
+.errorPHP { color: red;}
 	
 /* Header and Table Header Specifications */
 h1, h2, h3, h4, h5, h6, th {

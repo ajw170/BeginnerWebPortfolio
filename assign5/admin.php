@@ -7,7 +7,7 @@ index.html - PHP Introduction - Assignment 5
 //check to see if the session is valid
 session_start();
 
-if ($_SESSION["name"] != "awood")
+if ($_SESSION["name"] != "awood" or $_SESSION["password"] != "abc123")
 {
     header("location: index.php?error=2");
 }
@@ -33,8 +33,8 @@ else
         <hr />
         <p>Please select an option:</p>
         <button type="button" onclick="window.location.href='./add.php'">Add New Contact</button><br />
-        <button type="button">Modify Existing Contact</button><br />
-        <button type="button">Delete Contact</button><br />
+        <button type="button" onclick="window.location.href='./modify.php'">Modify Existing Contact</button><br />
+        <button type="button" onclick="window.location.href='./delete.php'">Delete Contact</button><br />
         <hr />
         <p>Address Book Entries:</p>
         <?php
@@ -58,7 +58,7 @@ else
                 $email = trim($parseLine[1]);
                 $phone = trim($parseLine[2]);
                 $today = trim($parseLine[3]);
-                echo "<tr><td>$name</td><td>$email</td><td>$phone</td>"
+                echo "<tr><td>$name</td><td><a href='mailto:$email'>$email</a></td><td>$phone</td>"
                         . "<td>$today</td></tr>";
                 ++$numEntries;
             }

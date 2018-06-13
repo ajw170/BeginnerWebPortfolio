@@ -34,7 +34,7 @@ index.html - PHP Introduction - Assignment 5
                     $password = "";
                     
                     //Check if the form has been submitted.  If it has, validate it.
-                    if ($_SERVER["REQUEST_METHOD"] == "POST")
+                    if (filter_input(INPUT_SERVER, "REQUEST_METHOD",FILTER_SANITIZE_SPECIAL_CHARS) == "POST")
                     {
                         if (empty($_POST["username"]))
                         {
@@ -46,6 +46,7 @@ index.html - PHP Introduction - Assignment 5
                             $name = cleanData($_POST["username"]);
                             //set session
                             $_SESSION["name"] = $name;
+                            $_SESSION["password"] = "";
                         }
                         
                         if (empty($_POST["password"]))
@@ -56,6 +57,7 @@ index.html - PHP Introduction - Assignment 5
                         {
                             //get password
                             $password = cleanData($_POST["password"]);
+                            $_SESSION["password"] = $password;
                         }
   
                     }

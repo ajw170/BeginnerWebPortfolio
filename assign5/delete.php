@@ -13,12 +13,6 @@ index.html - PHP Introduction - Assignment 5
     {
         $sessionName = $_SESSION["name"];
     }
-    
-    //$sessionName = $_SESSION["name"];
-    $insistFill = "";
-    $name = "";
-    $email = "";
-    $phone = "";
 ?>
 
 <?php
@@ -27,11 +21,23 @@ index.html - PHP Introduction - Assignment 5
         //get entry number to be modified
         $name = $_POST["name"];
         
-        //echo "<script>alert($name)</script>";
+         $filename = "addressBook.txt";
+         $fh = fopen($filename,'r') or die ("Fatal error!");
+                    
+         //read entire contents of file into the array
+         $fileLines = file($filename);
+         fclose($fh);
+         
+         //remove the entry in the array that corresponds to the desired deletion value
+         array_splice($fileLines, ($name + 1), 1);
         
-        //Now, bring the user to the modify page so they may modify the entry
-        $_SESSION["modVal"] = $name;
-        header("location: modVal.php");
+         $fh = fopen($filename,'w') or die ("Fatal error!");
+        //put everything from the $fileLines array back.
+        for ($i = 0; $i < count($fileLines); ++$i)
+        {
+            fwrite($fh,$fileLines[$i]);
+        }
+
     }
 ?>
 
@@ -44,13 +50,13 @@ index.html - PHP Introduction - Assignment 5
         <link rel="stylesheet" type="text/css" href="../style.css"></link>	
     </head>
     <body class ="clearfix">
-        <h1 style="text-align:center">Modify Entry</h1>
-        <p style="text-align:center">Modify an Address Book Entry!</p>
+        <h1 style="text-align:center">Delete Entry</h1>
+        <p style="text-align:center">Delete an Address Book Entry!</p>
         <hr />
         <i>Logged in user: <?php echo $sessionName ?> </i>
         <p><a href="./logout.php">Logout</a></p>
         <hr />
-        <p>Use the form below to modify an entry:</p>
+        <p>Use the form below to delete an entry:</p>
         <?php
             //create reference to file
             $filename = "addressBook.txt";
@@ -77,7 +83,7 @@ index.html - PHP Introduction - Assignment 5
                 $phone = trim($parseLine[2]);
                 $today = trim($parseLine[3]);
 
-                echo "<tr><td><button value=$entryNum name='name' type='submit'>Modify</button></td>"
+                echo "<tr><td><button value=$entryNum name='name' type='submit'>Delete</button></td>"
                 . "<td>$name</td><td><a href='mailto:$email'>$email</a></td><td>$phone</td>"
                         . "<td>$today</td></tr>";
                 

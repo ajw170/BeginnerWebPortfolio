@@ -5,12 +5,23 @@ index.html - PHP Introduction - Assignment 5
 --->
 <?php
     session_start();
+    
+    if ($_SESSION["name"] != "awood" or $_SESSION["password"] != "abc123")
+    {
+        header("location: index.php?error=2");
+    }
+    else 
+    {
+        $sessionName = $_SESSION["name"];
+    } 
+    
     $sessionName = $_SESSION["name"];
     $insistFill = "";
     $name = "";
     $email = "";
     $phone = "";
     $today = "";
+    
 ?>
 
 <?php
@@ -28,21 +39,62 @@ index.html - PHP Introduction - Assignment 5
             $phone = $_POST["phone"];
             $today = date("m/d/y");
             
-            //Now, add the entries to the document
-            $filename = "addressBook.txt";
-            //open file for appending
-            $fh = fopen($filename,'a') or die ("Fatal error!");
-            fwrite($fh,$name);
-            fwrite($fh," | ");
-            fwrite($fh,$email);
-            fwrite($fh," | ");
-            fwrite($fh,$phone);
-            fwrite($fh," | ");
-            fwrite($fh,$today);
-            fwrite($fh,"\n");
-            fclose($fh);   
+            //check duplicates
+            $isDuplicate = checkDuplicates($name,$email,$phone);
+            if ($isDuplicate)
+            {
+                $insistFill = "You may not have duplicate entries.";
+            }
+            else
+            {
+            
+                //Now, add the entries to the document
+                $filename = "addressBook.txt";
+                //open file for appending
+                $fh = fopen($filename,'a') or die ("Fatal error!");
+                fwrite($fh,$name);
+                fwrite($fh,"|");
+                fwrite($fh,$email);
+                fwrite($fh,"|");
+                fwrite($fh,$phone);
+                fwrite($fh,"|");
+                fwrite($fh,$today);
+                fwrite($fh,"\n");
+                fclose($fh);   
+
+                $insistFill = "Entry Added!";
+            }
         }
         
+    }
+    
+    function checkDuplicates($name, $email, $phone)
+    {
+        $filename = "addressBook.txt";
+        $fh = fopen($filename,'r') or die ("Fatal error!");
+        //skip username and password lines
+        fgets($fh);
+        fgets($fh);
+        
+        //loop through entries checking for duplicates
+        while ($line = fgets($fh))
+        {
+            $parseLine = explode("|",$line);
+            $listName  = trim($parseLine[0]);
+            $listEmail = trim($parseLine[1]);
+            $listPhone = trim($parseLine[2]);
+            
+            //if all entries are the same
+            if ($listName == $name and $listEmail == $email and $listPhone == $phone)
+            {
+                //it is a duplicate
+                fclose($fh);
+                return true;
+            }
+        }
+       
+        fclose($fh);
+        return false; //default return value
     }
 ?>
 

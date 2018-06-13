@@ -7,6 +7,33 @@ index.html - PHP Introduction - Assignment 5
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST")
+{
+    $routeToAccess = 0;
+    $operation = "";
+    
+    //Get the name as the route ID, the value as the operation
+    foreach($_POST as $name => $val)
+    {
+        $routeToAccess = $name;
+        $operation = $val;
+    }
+    
+    //if a delete was requested
+    
+    
+    
+    
+    
+}
+
+
+
+
+?>
+
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<title>Contact Forms with PHP</title>
@@ -21,7 +48,6 @@ index.html - PHP Introduction - Assignment 5
                 <p style="text-align:center">Utilize the forms below to read, update, and delete and create new entries!</p>
 		<hr />
                 <p><strong>Airline Route Table</strong></p>
-                <button type="button" onclick="window.location.href='./addRecord.php'">Add Record</button><br />
                 
                 <table class="schedule">
                     <tr>
@@ -35,6 +61,7 @@ index.html - PHP Introduction - Assignment 5
                         <th>ETOPS Certified</th>
                         <th>Narrowbody Eligible</th>
                         <th>Widebody Eligible</th>
+                        <th>Route Class</th>
                     </tr>
 
                 <?php
@@ -58,13 +85,12 @@ index.html - PHP Introduction - Assignment 5
                     if ($result = $conn->query($sql))
                     {
                         $rowNum = 0;
-                        $row = $result->fetch_assoc();
                         //fetch the associative array
                         while ($row = $result->fetch_assoc())
                         {
                             echo "<tr>";
-                            echo "<td><button value=$rowNum name='modifyButtonPress' type='submit' >Modify</button></td>";
-                            echo "<td><button value=$rowNum name='deleteButtonPress' type='submit' >Delete</button></td>";
+                            echo "<td><form action='$_SERVER[PHP_SELF]' method='post'><input type='submit' value='Modify' name='$row[routeID]'></input></form></td>";
+                            echo "<td><form action='$_SERVER[PHP_SELF]' method='post'><input type='submit' value='Delete' name='$row[routeID]'></input></form></td>";
                             echo "<td>" . $row['routeID'] . "</td>";
                             echo "<td>" . $row['origin_code'] . "</td>";
                             echo "<td>" . $row['dest_code'] . "</td>";
@@ -82,12 +108,19 @@ index.html - PHP Introduction - Assignment 5
                             echo "<td>";
                             $output = ($row['is_WideBody'] == 1) ? "Yes" : "No";
                             echo "$output</td>";
+                            echo "<td>" . $row['RouteClass'] . "</td>";
                             echo "</tr>";
+                            ++$rowNum;
                         }
  
                     }
+                    
+                //close the connection for good measure
+                $conn->close();
                 ?>
-                </table>   
+                </table>
+                
+                <div align="center"><button type="button" onclick="window.location.href='./addRecord.php'">Add Record</button><br /></div>
               
                 <hr />
 		<h2>My ePortfolio Index</h2>

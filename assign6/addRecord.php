@@ -1,7 +1,7 @@
 <!---
 Andrew Wood's ePortfolio
 COP4813 - Summer 2018
-index.html - PHP Introduction - Assignment 5
+index.html - PHP Introduction - Assignment 6
 --->
 
 <?php
@@ -85,6 +85,8 @@ index.html - PHP Introduction - Assignment 5
          {
             $statusValue = "There was a problem adding the entry.  Please check the input and try again." . " " . $conn->error;
          }
+         
+         $conn->close();
 
     }
     //not posting updated data
@@ -112,7 +114,8 @@ index.html - PHP Introduction - Assignment 5
     <body class ="clearfix">
         <h1 style="text-align:center">Add Record</h1>
         <hr />
-        <p>Add a record to the Route database using the form below:</p>
+        <p>Add a record to the Route database using the form below.</p>
+        <p>Note: Only 3 letter Airport Codes are valid.</p>
          <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
              Origin Code:
              <input type="text" name="originCode" value="<?php echo $orig?>"</input><br />

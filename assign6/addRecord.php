@@ -79,7 +79,7 @@ index.html - PHP Introduction - Assignment 5
          
          if ($conn->query($sql) === TRUE) 
          {
-            $statusValue = "Value Added!";
+            $statusValue = "Record Added!";
          }       
          else 
          {

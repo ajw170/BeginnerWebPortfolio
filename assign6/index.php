@@ -8,6 +8,8 @@ index.html - PHP Introduction - Assignment 5
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <?php
+ $statusValue = "";
+ 
 if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
     $routeToAccess = 0;
@@ -21,12 +23,44 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     }
     
     //if a delete was requested
-    
-    
-    
-    
-    
+    if ($operation == 'Delete')
+    {
+        //connect to database
+         $servername = 'localhost';
+         $username = 'n01418213';
+         $password = 'titan7dr';
+         $database = 'dbAssign6';
+         
+         $conn = new mysqli($servername,$username,$password,$database);
+         
+         //check connection
+         if ($conn->connect_error) {
+            die("Connection failed: ") . $conn->connect_error;
+         }
+         
+         $sql = "DELETE FROM Routes WHERE routeID = $routeToAccess;";
+         
+         if ($conn->query($sql) === TRUE) 
+         {
+            $statusValue = "Record Deleted!";
+         }       
+         else 
+         {
+            $statusValue = "There was a problem deleting the entry.  Please check the input and try again." . " " . $conn->error;
+         }
+    }
+         
+         
+        
+        
+        
+        
+        
 }
+    
+    
+    
+    
 
 
 
@@ -121,7 +155,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
                 </table>
                 
                 <div align="center"><button type="button" onclick="window.location.href='./addRecord.php'">Add Record</button><br /></div>
-              
+                <p class="error"><?php echo $statusValue ?></p>
                 <hr />
 		<h2>My ePortfolio Index</h2>
 		<p><a href="../index.html">Andrew's ePortfolio Index</a></p>

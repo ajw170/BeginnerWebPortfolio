@@ -84,16 +84,11 @@ index.html - PHP Introduction - Assignment 5
                             echo "$output</td>";
                             echo "</tr>";
                         }
-                        
-                        
+ 
                     }
                 ?>
                 </table>   
-             
               
-                
-         
-                
                 <hr />
 		<h2>My ePortfolio Index</h2>
 		<p><a href="../index.html">Andrew's ePortfolio Index</a></p>

@@ -154,6 +154,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
                 
                 <div align="center"><button type="button" onclick="window.location.href='./addRecord.php'">Add Record</button><br /></div>
                 <p class="error"><?php echo $statusValue ?></p>
+                <p><a href="./ER_Diagram.png">Link to Database ER Diagram</a></p>
                 <hr />
 		<h2>My ePortfolio Index</h2>
 		<p><a href="../index.html">Andrew's ePortfolio Index</a></p>

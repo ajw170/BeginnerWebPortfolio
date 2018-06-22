@@ -59,10 +59,18 @@ index.html - PHP Introduction - Assignment 6
         }
         
         //insert the values into the database
+        /*
          $servername = 'localhost';
          $username = 'n01418213';
          $password = 'titan7dr';
          $database = 'dbAssign6';
+         * 
+         */
+         
+         $servername = 'localhost';
+         $username = 'n01418213';
+         $password = 'titan7dr';
+         $database = 'n01418213';
                     
          //create new connection to database
          $conn = new mysqli($servername,$username,$password,$database);
@@ -72,12 +80,13 @@ index.html - PHP Introduction - Assignment 6
             die("Connection failed: ") . $conn->connect_error;
          }
          
-         //now generate the query
-         $sql = "INSERT INTO Routes (origin_code,dest_code,route_distance,duration_mins,is_Active,
-             is_ETOPS,is_NarrowBody,is_WideBody,RouteClass) VALUES (\"$orig\",\"$dest\",$distance,$duration,$isActive,
-                 $isETOPS,$isNarrowBody,$isWideBody,\"$routeClass\");";
+         //now generate the query using prepared statement
+         $sql = $conn->prepare("INSERT INTO Routes (origin_code,dest_code,route_distance,duration_mins,is_Active,
+             is_ETOPS,is_NarrowBody,is_WideBody,RouteClass) VALUES (?,?,?,?,?,?,?,?,?)");
          
-         if ($conn->query($sql) === TRUE) 
+         $sql->bind_param("ssiiiiiis",$orig,$dest,$distance,$duration,$isActive,$isETOPS,$isNarrowBody,$isWideBody,$routeClass);
+         
+         if ($sql->execute())
          {
             $statusValue = "Record Added!";
          }       

@@ -63,10 +63,18 @@ index.html - PHP Introduction - Assignment 6
         }
         
         //insert the values into the database
+        /*
          $servername = 'localhost';
          $username = 'n01418213';
          $password = 'titan7dr';
          $database = 'dbAssign6';
+         * 
+         */
+         
+         $servername = 'localhost';
+         $username = 'n01418213';
+         $password = 'titan7dr';
+         $database = 'n01418213';
                     
          //create new connection to database
          $conn = new mysqli($servername,$username,$password,$database);
@@ -77,52 +85,70 @@ index.html - PHP Introduction - Assignment 6
          }
          
          //now generate the query
-         $sql = "UPDATE Routes SET origin_code=\"$orig\" WHERE routeID=$routeToModify";
-         if(!$conn->query($sql))
+         //$sql = "UPDATE Routes SET origin_code=\"$orig\" WHERE routeID=$routeToModify";
+         $sql = $conn->prepare("UPDATE Routes SET origin_code = ? WHERE routeID= ?");
+         $sql->bind_param("si",$orig,$routeToModify);
+         if(!$sql->execute())
          {
              $error = 1;
          }
-         $sql = "UPDATE Routes SET dest_code=\"$dest\" WHERE routeID=$routeToModify";
-         if(!$conn->query($sql))
+        
+         $sql = $conn->prepare("UPDATE Routes SET dest_code=? WHERE routeID=?");
+         $sql->bind_param("si",$dest,$routeToModify);
+         if(!$sql->execute())
          {
              $error = 1;
          }
-         $sql = "UPDATE Routes SET route_distance=$distance WHERE routeID=$routeToModify";
-         if(!$conn->query($sql))
-         {
-             $error = 1;
-         }
-         $sql = "UPDATE Routes SET duration_mins=$duration WHERE routeID=$routeToModify";
-         if(!$conn->query($sql))
-         {
-             $error = 1;
-         }
-         $sql = "UPDATE Routes SET is_Active=$isDeployed WHERE routeID=$routeToModify";
-         if(!$conn->query($sql))
-         {
-             $error = 1;
-         }
-         $sql = "UPDATE Routes SET is_ETOPS=$isETOPS WHERE routeID=$routeToModify";
-         if(!$conn->query($sql))
-         {
-             $error = 1;
-         }
-         $sql = "UPDATE Routes SET is_NarrowBody=$isNarrowBody WHERE routeID=$routeToModify";
-         if(!$conn->query($sql))
-         {
-             $error = 1;
-         }
-         $sql = "UPDATE Routes SET is_WideBody=$isWideBody WHERE routeID=$routeToModify";
-         if(!$conn->query($sql))
-         {
-             $error = 1;
-         }
-         $sql = "UPDATE Routes SET RouteClass=\"$routeClass\" WHERE routeID=$routeToModify";
-         if(!$conn->query($sql))
+        
+         $sql = $conn->prepare("UPDATE Routes SET route_distance=? WHERE routeID=?");
+         $sql->bind_param("ii",$distance,$routeToModify);
+         if(!$sql->execute())
          {
              $error = 1;
          }
          
+         $sql = $conn->prepare("UPDATE Routes SET duration_mins=? WHERE routeID=?");
+         $sql->bind_param("ii",$duration,$routeToModify);
+         if(!$sql->execute())
+         {
+             $error = 1;
+         }
+         
+         $sql = $conn->prepare("UPDATE Routes SET is_Active=? WHERE routeID=?");
+         $sql->bind_param("ii",$isDeployed,$routeToModify);
+         if(!$sql->execute())
+         {
+             $error = 1;
+         }
+         
+         $sql = $conn->prepare("UPDATE Routes SET is_ETOPS=? WHERE routeID=?");
+         $sql->bind_param("ii",$isETOPS,$routeToModify);
+         if(!$sql->execute())
+         {
+             $error = 1;
+         }
+         
+         $sql = $conn->prepare("UPDATE Routes SET is_NarrowBody=? WHERE routeID=?");
+         $sql->bind_param("ii",$isNarrowBody,$routeToModify);
+         if(!$sql->execute())
+         {
+             $error = 1;
+         }
+         
+         $sql = $conn->prepare("UPDATE Routes SET is_WideBody=? WHERE routeID=?");
+         $sql->bind_param("ii",$isWideBody,$routeToModify);
+         if(!$sql->execute())
+         {
+             $error = 1;
+         }
+         
+         $sql = $conn->prepare("UPDATE Routes SET RouteClass=? WHERE routeID=?");
+         $sql->bind_param("si",$routeClass,$routeToModify);
+         if(!$sql->execute())
+         {
+             $error = 1;
+         }
+               
          if (!$error) 
          {
             $statusValue = "Record Modified!";
@@ -137,11 +163,18 @@ index.html - PHP Introduction - Assignment 6
     //display values currently contained
     else
     {
+        /*
         $servername = 'localhost';
         $username = 'n01418213';
         $password = 'titan7dr';
         $database = 'dbAssign6';
-
+         * */
+         
+        
+        $servername = 'localhost';
+        $username = 'n01418213';
+        $password = 'titan7dr';
+        $database = 'n01418213';
         //create new connection to database
         $conn = new mysqli($servername,$username,$password,$database);
 

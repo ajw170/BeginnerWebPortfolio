@@ -24,10 +24,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     if ($operation == 'Delete')
     {
         //connect to database
+        /*
          $servername = 'localhost';
          $username = 'n01418213';
          $password = 'titan7dr';
          $database = 'dbAssign6';
+         * */
+         
+         $servername = 'localhost';
+         $username = 'n01418213';
+         $password = 'titan7dr';
+         $database = 'n01418213';
          
          $conn = new mysqli($servername,$username,$password,$database);
          
@@ -97,10 +104,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
                     </tr>
 
                 <?php
+                /*
                     $servername = 'localhost';
                     $username = 'n01418213';
                     $password = 'titan7dr';
                     $database = 'dbAssign6';
+                 * 
+                 */
+                    
+                    $servername = 'localhost';
+                    $username = 'n01418213';
+                    $password = 'titan7dr';
+                    $database = 'n01418213';
                     
                     //create new connection to database
                     $conn = new mysqli($servername,$username,$password,$database);

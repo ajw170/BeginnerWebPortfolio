@@ -75,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<title>Contact Forms with PHP</title>
+		<title>Airline Routes</title>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
                 <link rel="stylesheet" type="text/css" href="../style.css"></link>	
@@ -115,7 +115,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
                     $servername = 'localhost';
                     $username = 'n01418213';
                     $password = 'titan7dr';
-                    $database = 'n01418213';
+                    $database = 'dbAssign6';
                     
                     //create new connection to database
                     $conn = new mysqli($servername,$username,$password,$database);

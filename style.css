@@ -50,7 +50,8 @@ p, tr, td, i, .numOptions {
 /* Form Specifications */
 form {
 	font-family: "Verdana", sans-serif;
-	color: rgb(60,60,60)
+	color: rgb(60,60,60);
+        margin: 0px;
 	}
 	
 .error {

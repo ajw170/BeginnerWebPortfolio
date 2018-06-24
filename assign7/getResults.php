@@ -15,7 +15,7 @@ $value = filter_input(INPUT_POST,'value',FILTER_SANITIZE_STRING);
 $servername = 'localhost';
 $username = 'n01418213';
 $password = 'titan7dr';
-$database = 'dbAssign6';
+$database = 'n01418213';
 
 //create new connection to database
 $conn = new mysqli($servername,$username,$password,$database);

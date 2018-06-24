@@ -26,18 +26,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     {
         //connect to database
         
+        /*
          $servername = 'localhost';
          $username = 'n01418213';
          $password = 'titan7dr';
          $database = 'dbAssign6';
+         * 
+         */
          
          
-        /* uncomment for submission
+       
          $servername = 'localhost';
          $username = 'n01418213';
          $password = 'titan7dr';
          $database = 'n01418213';
-         */
+        
          
          $conn = new mysqli($servername,$username,$password,$database);
          

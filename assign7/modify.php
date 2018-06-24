@@ -64,17 +64,20 @@ index.html - AJAX - Assignment 7
         
         //insert the values into the database
      
+        /*
          $servername = 'localhost';
          $username = 'n01418213';
          $password = 'titan7dr';
          $database = 'dbAssign6';
+         * 
+         */
          
-         /*
+        
          $servername = 'localhost';
          $username = 'n01418213';
          $password = 'titan7dr';
          $database = 'n01418213';
-          */
+          
                     
          //create new connection to database
          $conn = new mysqli($servername,$username,$password,$database);
@@ -163,20 +166,21 @@ index.html - AJAX - Assignment 7
     //display values currently contained
     else
     {
-
-        $servername = 'localhost';
-        $username = 'n01418213';
-        $password = 'titan7dr';
-        $database = 'dbAssign6';
-
-         
         /*
         $servername = 'localhost';
         $username = 'n01418213';
         $password = 'titan7dr';
-        $database = 'n01418213';
+        $database = 'dbAssign6';
          * 
          */
+
+         
+        
+        $servername = 'localhost';
+        $username = 'n01418213';
+        $password = 'titan7dr';
+        $database = 'n01418213';
+       
         //create new connection to database
         $conn = new mysqli($servername,$username,$password,$database);
 

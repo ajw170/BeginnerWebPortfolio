@@ -59,18 +59,20 @@ index.html - AJAX - Assignment 7
         }
         
         //insert the values into the database
-    
+        /*
          $servername = 'localhost';
          $username = 'n01418213';
          $password = 'titan7dr';
          $database = 'dbAssign6';
+         * 
+         */
        
-         /*
+         
          $servername = 'localhost';
          $username = 'n01418213';
          $password = 'titan7dr';
          $database = 'n01418213'; 
-          */
+          
          
          
          //create new connection to database

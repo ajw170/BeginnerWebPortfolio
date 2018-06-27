@@ -28,7 +28,7 @@ if ($loggedInUser)
        die("Connection failed: ") . $conn->connect_error;
     }
     
-    $sql = "SELECT fName FROM userData WHERE username = \"$loggedInUser\"";
+    $sql = "SELECT fName FROM userData WHERE userName = \"$loggedInUser\"";
     $result = $conn->query($sql);
     if ($result) //if query success
     {

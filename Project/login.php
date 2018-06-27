@@ -63,7 +63,7 @@ $password = "";
          //if the query fails
          //$sql = "SELECT password FROM login WHERE username = $username";
          
-         $sql = "SELECT * FROM login WHERE username = \"$username\"";
+         $sql = "SELECT * FROM login WHERE userName = \"$username\"";
          $result = $conn->query($sql);
      
          if (!$result)  

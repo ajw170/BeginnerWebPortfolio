@@ -35,7 +35,7 @@ if (strcmp($retrieveName,"defaultDisplay") === 0) //if its the default
 }
 else //we're logged in with a user
 {
-    $sql = "SELECT * FROM product WHERE username = \"$retrieveName\" LIMIT 5";
+    $sql = "SELECT * FROM product WHERE userName = \"$retrieveName\" LIMIT 5";
 }
 
 $result = $conn->query($sql);

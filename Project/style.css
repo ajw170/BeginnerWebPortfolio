@@ -4,11 +4,13 @@ body {
 	background-color: black;
 }
 .header{
-	
+	width:100%;
+	background-color:white;
 }
 .navbar-positioning{
 
 	background-color: white;
+	
 	width: 100%;
 	height: 4em;
 }
@@ -18,8 +20,9 @@ body {
 	margin-left: auto;
 	margin-right: auto;
 	height: 4em;
-
+	background-color:white;
 	width: 55em;
+	padding: 0 .5em;
 }
 
 .navbar ul{
@@ -33,7 +36,6 @@ body {
 
 .navbar-left{
 	float: left;
-        width: 50%;
 
 	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	font-weight: bold;
@@ -41,8 +43,7 @@ body {
 }
 
 .navbar-right{
-	float: left;
-        width: 50%;
+	float: right;
 }
 
 .navbar li{
@@ -58,34 +59,121 @@ body {
 	
 	
 	text-align: center;
-	padding: 14px 16px;
+	padding: 14px .6em;
 	text-decoration: none;
 }
 .navbar li a:hover {
-	/*background-color: white; */
-	color: red;
+	//background-color: white;
+	color: orange;
+}
+.logos{
+	background-color: none;
+	float: left;
+	margin: 0;
+	padding: 0;
+	
+}
+#logo-left{
+	height: 2em;
+	outline: 0;
+	outline: none;
+	margin-right: .4em;
+	padding-top: .9em;
+	
+}
+#logo-right{
+	
+	height: 1.5em;
+	outline: 0;
+	outline: none;
+	margin-right: 1em;
+	padding-top: 1.4em;
+}
+.login{
+	padding: 0;
+	margin: 0;
+
+	padding-top: .8em;
+	float: right;
+}
+.login a{
+	text-decoration: none;
+	color: black;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font-size: .7em;
+}
+.login a:hover{
+	color: orange;
+}
+#logo-user{
+	height: 1.5em;
 }
 
+.cart{
+	padding: 0;
+
+	margin: 0;
+	margin-left: 1em;
+	padding-top: .8em;
+	float: right;
+}
+.cart:hover{
+	color: orange;
+}
+.cart a{
+	text-decoration: none;
+	color: black;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font-size: .7em;
+}
+.cart a:hover{
+	color: orange;
+}
+#logo-cart{
+	height: 1.5em;
+}
+#searchbar{
+	float:right;
+	margin-right: auto;
+	margin-left: 1em;
+	padding-top: .7em;
+}
+
+
+
 .welcome-banner{
-	background-color: rgba(0, 0, 0, 0.2);
+	background-color: rgba(0, 0, 0, 0);
 	
 	width: 100%;
 	height: 8em;
+
 }
-
+.welcome-pos{
+	margin-left:auto;
+	margin-right:auto;
+	width: 48em;
+}
+.welcome-img{
+        height: 7em;
+	margin-top:.5em;
+	float: left;
+}
 .welcome-text{
-	height: 8em;
-	width: 40em;
-
-	margin-left: auto;
-	margin-right: auto;
-	padding: 2.5em;
+	font-family: 'Fjalla One', sans-serif;
+	font-size: 1.4em;
+	height: 2.5em;
+	text-shadow: 0 0 6px white;	
+			
+	margin:0;
+	float:right;
+	padding: 1em;
 	text-align: center;
+	margin-top: .5em;
 }
 
 .featured-event{
 	background-color: lightblue;
-	/*display: inline-block;*/
+	//display: inline-block;
 	margin: 0;
 	padding: 0;
 	width: 100%;
@@ -98,16 +186,16 @@ body {
 	margin-right: auto;
 	line-height: 4em;
 	text-align: center;
-	
-	/*padding: 2.5em;*/
+	background-color:lightblue;	
+	//padding: 2.5em;
 	
 }
 
 .background-img{
-	/*//background-image: url("https://cdn.segmentnext.com/wp-content/uploads/2016/09/FFXVWallpaper.jpg");
+	//background-image: url("https://cdn.segmentnext.com/wp-content/uploads/2016/09/FFXVWallpaper.jpg");
 	//background-repeat: no-repeat;
 	//background-size: contain;
-	//padding-top: 20em;*/
+	//padding-top: 4em;
 	position: fixed;
 	z-index: -1;
 }
@@ -127,7 +215,7 @@ body {
 
 
 	width: 53em;
-	height: 81.7em;
+	height: 100%;
 	margin-left: auto;
 	margin-right: auto;
 	padding: 1em;
@@ -135,19 +223,18 @@ body {
 	
 	
 }
-
-.errorPHP { color: red;}
 .inner-main-content{
 	background-color: white;
 
 
 	display: grid;
-	height: 60em;
+	height: auto;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .inner-header{
 	background-color: lightgrey;
 
+	grid-column:1/span 3;
 
 	height: 1.5em;
 	text-align: center;
@@ -158,14 +245,14 @@ body {
 	border-width: .08em;
 	border-color: darkorange;
 	border-radius: .4em;
-
+	margin: .5em;
 	margin-bottom: 1em;
 }
 .container{
 	background-color: white;
 	
 
-	/*//margin: 0% 1% 0% 1%;*/
+	//margin: 0% 1% 0% 1%;
 	text-align: center;
 	margin: 0;
 	padding: .5em .5em 0 .5em;
@@ -174,14 +261,128 @@ body {
 }
 .content-left{
 	grid-column: 1;
+	width: 35em;
 	padding: 0;
-	/*//padding: 1%;*/
+	//padding: 1%;
 
 }
+#slideshow_cont{
+	padding:0;
+	
+}
+.slideshow{
+	padding:0;
+	width: 30em; height: 20em;
+	margin-left: auto;
+	margin-right: auto;	
+	background-color:blue;
+	overflow:hidden;
+}
+.mySlides{
+	margin:auto;
+	max-width 30em;
+	//max-height: 20em;
+	//width: 30em;
+	height: 20em;
+
+}
+
+
+
+
+#gamesForSale{
+	
+}
+#GFS_title{
+	
+}
+#gamesForSale table{
+	border-spacing: 0;
+	margin-left:auto;
+	margin-right:auto;
+}
+#gamesForSale tbody{
+	text-align:left;
+}
+#gamesForSale tr{
+	
+}
+#gamesForSale tr:nth-child(even){
+	background-color: lightgrey;
+}
+#gamesForSale td{
+	padding: .4em;
+}
+#gamesForSale td:nth-child(3){
+	float: right;
+
+}
+
 .content-right{
 	grid-column: 3;
-	/*//padding: 1%;*/
+	width: 17em;
+	//padding: 1%;
 }
+#results{
+	max-height: 30em;
+	height: 30em;
+	text-align:left;
+	background-color:pink;	
+	overflow-y:scroll;
+	overflow:auto;
+	font-family: 'Work Sans', sans-serif;
+
+	padding:0;
+	margin:0;
+}
+#r_container{
+	text-align: left;
+	background-color:blue;
+	padding:0;
+	margin:0;
+}
+#r_title{
+	text-align: left;	
+	background-color: orange;
+}
+#r_sys{
+	text-align:right;
+	background-color: tan;
+}
+#r_rating{
+	text-align:right;
+	background-color: grey;
+}
+#r_rating:before{
+	content:"rating: ";
+}
+#r_rating:after{
+	content:"/10";
+}
+#r_price{
+	text-align:right;
+	background-color: red;
+}
+#r_price:before{
+	content: "$";
+}
+#r_seller{
+	text-align:right;
+	background-color: teal;
+}
+#r_genre{
+	text-align:right;
+	background-color: silver;
+}
+#r_SKU{
+	text-align:right;
+	background-color: darkorange;
+}
+
+
+
+
+
 
 hr{
 	padding: 0;

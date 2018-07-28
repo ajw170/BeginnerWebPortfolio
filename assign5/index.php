@@ -7,6 +7,7 @@ index.html - PHP Introduction - Assignment 5
     //start session so I can redirect users to other page while maintaining information
     session_start();
     //global variables
+    phpinfo();
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"

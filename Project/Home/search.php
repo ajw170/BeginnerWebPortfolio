@@ -21,10 +21,6 @@
     $password = "summer2018123432";
     $database = "group1";
 
-    if(!is_null($_GET['productID'])) {
-        $productID = $_GET['productID'];
-    }
-    
     $in1 = $_GET['in1'];
 
     try {
@@ -34,53 +30,38 @@
 
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        //If productID isn't null, a single game with that ID needs to be displayed
-        if(!is_null($productID)) {
-
-            //$result = array($productID => $productID);
-
-            $stmt = $conn->prepare("SELECT productName, rating, price, displayName, 
-            genre1, genre2, genre3, genre4, genre5, skuNumber FROM product WHERE productID = '".$productID."'");
-
-            $stmt->execute();
-        }
-
-        //If productID is null, the set of games matching a search string needs to be displayed
-        else {
-
-            $stmt = $conn->prepare("SELECT productName, system, rating, price, userName, genre1, 
+            $stmt = $conn->prepare("SELECT productID, forSale, productName, `system`, rating, price, userName, genre1, 
             genre2, genre3, genre4, genre5, skuNumber FROM product WHERE LOCATE('".$in1."', productName) > 0 UNION
             
-            SELECT productName, system, rating, price, userName, genre1, 
+            SELECT productID, forSale, productName, `system`, rating, price, userName, genre1, 
             genre2, genre3, genre4, genre5, skuNumber FROM product WHERE LOCATE('".$in1."', skuNumber) > 0 UNION
 
-            SELECT productName, system, rating, price, userName, genre1, 
-            genre2, genre3, genre4, genre5, skuNumber FROM product WHERE LOCATE('".$in1."', system) > 0 UNION
+            SELECT productID, forSale, productName, `system`, rating, price, userName, genre1, 
+            genre2, genre3, genre4, genre5, skuNumber FROM product WHERE LOCATE('".$in1."', `system`) > 0 UNION
             
-            SELECT productName, system, rating, price, userName, genre1, 
+            SELECT productID, forSale, productName, `system`, rating, price, userName, genre1, 
             genre2, genre3, genre4, genre5, skuNumber FROM product WHERE LOCATE('".$in1."', genre1) > 0 UNION
 
-            SELECT productName, system, rating, price, userName, genre1, 
+            SELECT productID, forSale, productName, `system`, rating, price, userName, genre1, 
             genre2, genre3, genre4, genre5, skuNumber FROM product WHERE LOCATE('".$in1."', genre2) > 0 UNION
 
-            SELECT productName, system, rating, price, userName, genre1, 
+            SELECT productID, forSale, productName, `system`, rating, price, userName, genre1, 
             genre2, genre3, genre4, genre5, skuNumber FROM product WHERE LOCATE('".$in1."', genre3) > 0 UNION
 
-            SELECT productName, system, rating, price, userName, genre1, 
+            SELECT productID, forSale, productName, `system`, rating, price, userName, genre1, 
             genre2, genre3, genre4, genre5, skuNumber FROM product WHERE LOCATE('".$in1."', genre4) > 0 UNION
 
-            SELECT productName, system, rating, price, userName, genre1, 
+            SELECT productID, forSale, productName, `system`, rating, price, userName, genre1, 
             genre2, genre3, genre4, genre5, skuNumber FROM product WHERE LOCATE('".$in1."', genre5) > 0");    
 
             $stmt->execute();
-        }
-
-        //echo "<table>";
 
         while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
             echo 
             "<div class='r_container'>
+                <img src='../images/".sanitize($row['productName']).".png' alt='Cover Art'>
+                <div class='r_text'>
                 <h2 id='r_title'>".sanitize($row['productName'])."</h2>
                 <p id='r_sys'>".sanitize($row['system'])."</p>
                 <p id='r_rating'>".sanitize($row['rating'])."</p>
@@ -89,11 +70,13 @@
                 <p id='r_genre'>Tags: ".sanitize($row['genre1'])." ".sanitize($row['genre2'])." ".sanitize($row['genre3'])." 
                 ".sanitize($row['genre4'])." ".sanitize($row['genre5'])."</p>
                 <p id='r_SKU'>SKU Number: ".sanitize($row['skuNumber'])."</p>
-                <hr>
+                
+                <p><button>Add to Cart!</button></p>
+                    
+                </div>
             </div>";
         }
 
-        //echo "</table>";
     }
 
     catch(PDOException $e) {

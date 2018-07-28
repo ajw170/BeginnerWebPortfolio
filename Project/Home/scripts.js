@@ -13,21 +13,12 @@ function getMyGames(){
   xhttp.send();
 }
 
-//Pass a productID and an HTML ID to displayGame, and it will
+//Pass a productName and an HTML ID to displayGame, and it will
 //insert that game's info into the corresponding element
+//Pass the string "displayAll" and it will display all games in that element.
 function displayGame(productID, divID) {
 
-  if(productID.length == 0) {
-
-      //Display nothing? Or just return
-      //document.getElementById(divID).innerHTML = "";
-
-      return;
-  }
-  
-  else {
-
-      var xmlhttp = new XMLHttpRequest();
+    var xmlhttp = new XMLHttpRequest();
   
       xmlhttp.onreadystatechange = function() {
   
@@ -38,9 +29,8 @@ function displayGame(productID, divID) {
           }
       };
 
-      xmlhttp.open("GET", "search.php?productID=" + productID, true);
+      xmlhttp.open("GET", "../browse/showall.php?productID=" + productID, true);
       xmlhttp.send();
-  }
 }
 
 function searchGames(string, divID) {
@@ -66,7 +56,7 @@ function searchGames(string, divID) {
           }
       };
 
-      xmlhttp.open("GET", "search.php?in1=" + string, true);
+      xmlhttp.open("GET", "../home/search.php?in1=" + string, true);
       xmlhttp.send();
   }
 }

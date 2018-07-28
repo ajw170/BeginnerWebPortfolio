@@ -23,7 +23,7 @@ $result = $conn->query($sql);
 $conn->close();
 
 //send response
-$responseText = "Currently for Sale! <button onclick=unMarkForSale(\"$productID\",$buttonNum)>Cancel</button>";
+$responseText = "For Sale! <button onclick=unMarkForSale(\"$productID\",$buttonNum)>Cancel</button>";
 
 echo $responseText;
 

@@ -68,7 +68,8 @@ while ($row = $result->fetch_assoc())
         
         if (strcmp($retrieveName,"defaultDisplay") === 0) //if not logged in
         {
-            $responseText .= "</tr>";
+            $responseText .= "<td>";
+            $responseText .= "<button onclick=window.location.href='./login.php'>Add to Cart</button></td>";
             continue;
         }
         else

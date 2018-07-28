@@ -70,7 +70,7 @@ else
             $responseText .= "<td id = saleButtonProdID" . $buttonNum .">";
             if ($forSale)
             {
-                $responseText .= "Currently for Sale! <button onclick=unMarkForSale(\"$productID\",$buttonNum)>Cancel</button>";
+                $responseText .= "For Sale! <button onclick=unMarkForSale(\"$productID\",$buttonNum)>Cancel</button>";
             }
             else
             {
